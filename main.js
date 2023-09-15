@@ -30,6 +30,31 @@ function fetchRandomGif(searchTerm) {
         //display a default image or an error message
         img.src = 'default-image.png';
       }
+    })
+    .catch(function(err) {
+      console.error(err);
+      //handle error
+      img.src = 'error-image.png';
     });
 }
+
+//initial fetch when the  page loads
 fetchRandomGif('cats');
+
+// event listener for the search button
+searchBtn.addEventListener('click', function() {
+  const searchTerm = searchInput.value.trim();
+  if (searchTerm!=='') {
+    fetchRandomGif(searchTerm); //
+  }
+});
+
+// event listener for the new image button
+newImageButton.addEventListener('click', function() {
+  const currentSearchTerm = searchInput.value.trim();
+  if (currentSearchTerm !== '') {
+    fetchRandomGif(currentSearchTerm);
+  }else {
+    fetchRandomGif('cats');
+  }
+});
